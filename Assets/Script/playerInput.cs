@@ -9,6 +9,7 @@ public class playerInput : MonoBehaviour
     public bool isWalking { get; private set; }
     public bool isSprinting { get; private set; }
     public bool Jump { get; private set; }
+    public bool Crouch {  get; private set; } // also used in crouch slide
 
     private void Awake()
     {
@@ -31,6 +32,9 @@ public class playerInput : MonoBehaviour
 
         _playerInputActions.Player.Jump.started += onJumpPeformed;
         _playerInputActions.Player.Jump.canceled += onJumpCanceled;
+
+        _playerInputActions.Player.Crouch.performed += onCrouchPerformed;
+        _playerInputActions.Player.Crouch.canceled += onCrouchCanceled;
     }
 
     private void OnDisable()
@@ -48,6 +52,9 @@ public class playerInput : MonoBehaviour
         _playerInputActions.Player.Jump.started -= onJumpPeformed;
         _playerInputActions.Player.Jump.canceled -= onJumpCanceled;
 
+        _playerInputActions.Player.Crouch.performed -= onCrouchPerformed;
+        _playerInputActions.Player.Crouch.canceled -= onCrouchCanceled;
+
         _playerInputActions.Player.Disable();
     }
 
@@ -61,6 +68,9 @@ public class playerInput : MonoBehaviour
     private void OnSprintPerformed(InputAction.CallbackContext ctx) => isSprinting = true;
     private void OnSprintCanceled(InputAction.CallbackContext ctx) => isSprinting = false;
 
+    private void onCrouchPerformed(InputAction.CallbackContext ctx) => Crouch = true;
+    private void onCrouchCanceled(InputAction.CallbackContext ctx) => Crouch = false;
+
     private void onJumpPeformed(InputAction.CallbackContext ctx)
     {
         if (!Jump)
@@ -69,7 +79,6 @@ public class playerInput : MonoBehaviour
             StartCoroutine(ResetJump());
         }
     }
-
     private void onJumpCanceled(InputAction.CallbackContext ctx) => Jump = false;
 
     //temp fix until i figure out how to reset the jump input using the new input system ><

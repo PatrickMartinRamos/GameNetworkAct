@@ -20,6 +20,14 @@ public class playerAnimation : NetworkBehaviour
         onRunAnimation(); 
         onSprintAnimation();
         onJumpAnimation();
+        onCrouchAnimation();
+        onCrouchWalk();
+        onSprintSlide();
+
+        //Debug.Log("is crouch " + _inputHandler.Crouch);
+        //Debug.Log("is walking " + _inputHandler.isWalking);
+        //Debug.Log("is running " + _inputHandler.runInput);
+        //Debug.Log("is sprinting " + _inputHandler.isSprinting);
     }
     public void onRunAnimation()
     {
@@ -55,5 +63,49 @@ public class playerAnimation : NetworkBehaviour
         }
     }
 
+    public void onCrouchAnimation()
+    {
+        if(!_inputHandler.isWalking && !_inputHandler.isSprinting && !_inputHandler.Jump)
+        {
+            if (_inputHandler.Crouch)
+            {
+                //standing to crouch idle
+                _animator.SetBool("StandingToCrouch", true);
+            }
+            else
+            {
+                _animator.SetBool("StandingToCrouch", false);
+            }
+        }
+    }
+    public void onCrouchWalk()
+    {
+        //crouch idle to crouch walk
+        if (!_inputHandler.isWalking && !_inputHandler.isSprinting && !_inputHandler.Jump)
+        {
+            if (_inputHandler.Crouch)
+            {
+                //standing to crouch idle
+                _animator.SetFloat("C_Horizontal", _inputHandler.runInput.x * 1f, 0.15f, Time.deltaTime);
+                _animator.SetFloat("C_Vertical", _inputHandler.runInput.y * 1f, 0.15f, Time.deltaTime);
+            }
+            //else
+            //{
+            //    _animator.SetBool("StandingToCrouch", false);
+            //}
+        }
+    }
 
+    public void onSprintSlide()
+    {
+        if (!_inputHandler.isWalking && !_inputHandler.Jump)
+        {
+            if (_inputHandler.isSprinting && _inputHandler.Crouch)
+            {
+                //sprint to slide
+                _animator.SetFloat("Vertical", _inputHandler.runInput.y * 3f, 0.05f, Time.deltaTime);
+                _animator.SetFloat("Horizontal", _inputHandler.runInput.x * 3f, 0.05f, Time.deltaTime);
+            }
+        }
+    }
 }

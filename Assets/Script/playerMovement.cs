@@ -10,7 +10,7 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 1f;
     [SerializeField] private float sprintSpeed = 10f;
     private Vector3 moveDirection;
-    private float rotateSpeed = 5f;
+    private float rotateSpeed = 9f;
     private Transform _cameraTransform;
 
     private Vector3 _velocity;
@@ -36,7 +36,7 @@ public class playerMovement : MonoBehaviour
         MovePlayer();
         ApplyGravity();
         Jump();    
-        Debug.Log(_inputHandler.Jump);
+        //Debug.Log(_inputHandler.Jump);
     }
 
     private void MovePlayer()
@@ -102,13 +102,13 @@ public class playerMovement : MonoBehaviour
             _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
-    private void OnDrawGizmos()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (groundCheck != null)
+    //    {
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    //    }
+    //}
         
 }
