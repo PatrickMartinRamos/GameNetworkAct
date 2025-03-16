@@ -24,7 +24,6 @@ public class playerAnimation : NetworkBehaviour
             onSprintAnimation();
             onJumpAnimation();
             onCrouchAnimation();
-            onCrouchWalk();
             onSprintSlide();
         }
     }
@@ -74,25 +73,12 @@ public class playerAnimation : NetworkBehaviour
             if (_inputHandler.Crouch)
             {
                 _animator.SetBool("StandingToCrouch", true);
+                _animator.SetFloat("C_Horizontal", _inputHandler.runInput.x, 0.05f, Time.deltaTime);
+                _animator.SetFloat("C_Vertical" , _inputHandler.runInput.y, 0.05f, Time.deltaTime);
             }
             else
             {
                 _animator.SetBool("StandingToCrouch", false);
-            }
-        }
-    }
-
-    public void onCrouchWalk()
-    {
-        if (!_inputHandler.isWalking && !_inputHandler.isSprinting && !_inputHandler.Jump)
-        {
-            if (_inputHandler.Crouch)
-            {
-                _animator.SetBool("CrouchWalk", true);
-            }
-            else
-            {
-                _animator.SetBool("CrouchWalk", false);
             }
         }
     }
