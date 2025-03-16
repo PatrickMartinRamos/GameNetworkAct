@@ -601,9 +601,9 @@ GameObject:
   - component: {fileID: 5099221719924751658}
   - component: {fileID: 124486659283053013}
   - component: {fileID: 2113506451430645691}
-  - component: {fileID: 6739315253037242506}
   - component: {fileID: 9012995608993024731}
-  - component: {fileID: 351099410313843951}
+  - component: {fileID: 3350143415795845466}
+  - component: {fileID: 6348688872224871056}
   m_Layer: 8
   m_Name: Human_DummyModel_M
   m_TagString: Untagged
@@ -620,7 +620,7 @@ Transform:
   m_GameObject: {fileID: 2223992578010502896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.105976, y: 0, z: -22.805649}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -670,13 +670,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.75
+  m_Radius: 0.24
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.02, z: 0}
+  m_Center: {x: 0, y: 0.94, z: 0}
 --- !u!114 &262871547523152892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bf324d00cc064479fa3b7c2c982c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &5099221719924751658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,13 +799,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8000e94ce84ef8f4fac7becb4f130d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   runSpeed: 2
   walkSpeed: 1
   sprintSpeed: 4
-  jumpHeight: 0.7
+  jumpHeight: 3
   gravity: -9.81
-  gravityMultiplier: 1
-  jumpCooldown: 2
+  gravityMultiplier: 3
   groundCheck: {fileID: 5300870698027963355}
   groundLayer:
     serializedVersion: 2
@@ -824,7 +825,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _playerRootCameraTransform: {fileID: 6457435132555182508}
---- !u!114 &6739315253037242506
+--- !u!114 &9012995608993024731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223992578010502896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c467efdf53bfb949a7481b610c7d91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &3350143415795845466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223992578010502896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534c915cd6a3e70429199e6c29cb9ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 12437942723525277}
+--- !u!114 &6348688872224871056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -860,34 +889,6 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &9012995608993024731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2223992578010502896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c467efdf53bfb949a7481b610c7d91a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &351099410313843951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2223992578010502896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534c915cd6a3e70429199e6c29cb9ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 12437942723525277}
 --- !u!1 &2389374392539302659
 GameObject:
   m_ObjectHideFlags: 0

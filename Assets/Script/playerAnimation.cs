@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -16,19 +17,18 @@ public class playerAnimation : NetworkBehaviour
 
     void Update()
     {
-        onWalkAnimation();
-        onRunAnimation(); 
-        onSprintAnimation();
-        onJumpAnimation();
-        onCrouchAnimation();
-        onCrouchWalk();
-        onSprintSlide();
-
-        //Debug.Log("is crouch " + _inputHandler.Crouch);
-        //Debug.Log("is walking " + _inputHandler.isWalking);
-        //Debug.Log("is running " + _inputHandler.runInput);
-        //Debug.Log("is sprinting " + _inputHandler.isSprinting);
+        if (IsOwner)
+        {
+            onWalkAnimation();
+            onRunAnimation(); 
+            onSprintAnimation();
+            onJumpAnimation();
+            onCrouchAnimation();
+            onCrouchWalk();
+            onSprintSlide();
+        }
     }
+
     public void onRunAnimation()
     {
         if(_inputHandler.isWalking || _inputHandler.isSprinting) return;
@@ -36,6 +36,7 @@ public class playerAnimation : NetworkBehaviour
         _animator.SetFloat("Vertical", _inputHandler.runInput.y, 0.05f, Time.deltaTime);
         _animator.SetFloat("Horizontal", _inputHandler.runInput.x, 0.05f, Time.deltaTime);
     }
+
     public void onWalkAnimation()
     {
         if(_inputHandler.isWalking)
@@ -44,6 +45,7 @@ public class playerAnimation : NetworkBehaviour
             _animator.SetFloat("Horizontal", _inputHandler.runInput.x / 2, 0.05f, Time.deltaTime);
         }
     }
+
     public void onSprintAnimation()
     {
         if(_inputHandler.isSprinting)
@@ -52,14 +54,16 @@ public class playerAnimation : NetworkBehaviour
             _animator.SetFloat("Horizontal", _inputHandler.runInput.x * 1.5f, 0.05f, Time.deltaTime);
         }
     }
+
     public void onJumpAnimation()
     {
         if(_inputHandler.Jump)
         {
-            _animator.SetTrigger("Jump");
+            _animator.SetBool("Jump", true);
         }
-        else{
-            _animator.ResetTrigger("Jump");
+        else
+        {
+            _animator.SetBool("Jump", false);
         }
     }
 
@@ -69,7 +73,6 @@ public class playerAnimation : NetworkBehaviour
         {
             if (_inputHandler.Crouch)
             {
-                //standing to crouch idle
                 _animator.SetBool("StandingToCrouch", true);
             }
             else
@@ -78,21 +81,19 @@ public class playerAnimation : NetworkBehaviour
             }
         }
     }
+
     public void onCrouchWalk()
     {
-        //crouch idle to crouch walk
         if (!_inputHandler.isWalking && !_inputHandler.isSprinting && !_inputHandler.Jump)
         {
             if (_inputHandler.Crouch)
             {
-                //standing to crouch idle
-                _animator.SetFloat("C_Horizontal", _inputHandler.runInput.x * 1f, 0.15f, Time.deltaTime);
-                _animator.SetFloat("C_Vertical", _inputHandler.runInput.y * 1f, 0.15f, Time.deltaTime);
+                _animator.SetBool("CrouchWalk", true);
             }
-            //else
-            //{
-            //    _animator.SetBool("StandingToCrouch", false);
-            //}
+            else
+            {
+                _animator.SetBool("CrouchWalk", false);
+            }
         }
     }
 
@@ -100,11 +101,13 @@ public class playerAnimation : NetworkBehaviour
     {
         if (!_inputHandler.isWalking && !_inputHandler.Jump)
         {
-            if (_inputHandler.isSprinting && _inputHandler.Crouch)
+            if (_inputHandler.runningSlide)
             {
-                //sprint to slide
-                _animator.SetFloat("Vertical", _inputHandler.runInput.y * 3f, 0.05f, Time.deltaTime);
-                _animator.SetFloat("Horizontal", _inputHandler.runInput.x * 3f, 0.05f, Time.deltaTime);
+                _animator.SetBool("SprintSlide", true);
+            }
+            else
+            {
+                _animator.SetBool("SprintSlide", false);
             }
         }
     }

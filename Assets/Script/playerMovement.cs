@@ -17,8 +17,6 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 2.5f;
-    private bool canJump = true;  
-    [SerializeField] private float jumpCooldown = 0.5f; 
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -30,8 +28,7 @@ public class playerMovement : MonoBehaviour
         _inputHandler = GetComponent<playerInput>();  
         _cameraTransform = Camera.main.transform; 
     }
-
-    private void Update()
+    private void LateUpdate()
     {   
         MovePlayer();
         ApplyGravity();
